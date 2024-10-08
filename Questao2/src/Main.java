@@ -17,7 +17,6 @@ public class Main {
 
             switch (selecionar) {
                 case 1:
-                    // Cadastro do produto
                     System.out.println("Digite o código do produto: ");
                     p.setCodigo(sc.nextInt());
 
@@ -40,20 +39,16 @@ public class Main {
                     break;
 
                 case 2:
-                    // Venda do produto
                     System.out.println("Quantos produtos você quer comprar? ");
                     int quantidade = sc.nextInt();
 
-                    // Verificar a quantidade do produto em estoque
                     if (p.verificarEstoque(quantidade)) {
-                        // Se tiver estoque suficiente, vai para o método de pagamento
                         System.out.println("Digite o dígito referente à forma de pagamento escolhida: ");
                         System.out.println("1 - Pix | 2 - Espécie | 3 - Transferência | 4 - Débito | 5 - Crédito ");
                         int formaPagamento = sc.nextInt();
 
                         double valorFinal = p.getValor() * quantidade;
 
-                        // Desconto aplicado para as formas de pagamento de 1 a 4
                         if (formaPagamento >= 1 && formaPagamento <= 4) {
                             valorFinal *= 0.95;
                             System.out.println("Valor com desconto: R$ " + valorFinal);
@@ -64,19 +59,16 @@ public class Main {
                             System.out.println("Digite o valor pago: ");
                             double valorPago = sc.nextDouble();
 
-                            // Verificar se o valor pago é suficiente e calcular o troco
                             p.calcularTroco(valorPago, valorFinal);
 
-                            // Se o valor pago for suficiente, atualizar o estoque
                             if (valorPago >= valorFinal) {
                                 p.atualizarEstoque(quantidade);
                                 System.out.println("Pagamento realizado com sucesso!");
                             }
-                        } else if (formaPagamento == 5) { // Se o pagamento for no crédito
+                        } else if (formaPagamento == 5) { 
                             System.out.println("Deseja parcelar em 1, 2 ou 3 vezes?");
                             int parcelas = sc.nextInt();
 
-                            // Verificar se o número de parcelas está certo
                             if (parcelas >= 1 && parcelas <= 3) {
                                 double valorParcela = valorFinal / parcelas;
                                 System.out.println("Valor total: R$" + valorFinal + " em " + parcelas + "x de R$: " + valorParcela);
@@ -86,7 +78,6 @@ public class Main {
                                 System.out.println("O número de parcelas digitado é inválido");
                             }
                         } else {
-                            // Outras formas de pagamento
                             p.atualizarEstoque(quantidade);
                             System.out.println("Pagamento realizado com sucesso!");
                         }
@@ -94,12 +85,10 @@ public class Main {
                     break;
 
                 case 3:
-                    // Exibir detalhes do produto
                     p.exibirDetalhesProduto();
                     break;
 
                 case 4:
-                    // Sair do sistema
                     System.out.println("Saindo do sistema");
                     repetir = "n";
                     break;
